@@ -16,12 +16,12 @@ int main(void)
 	ret = write(STDERR_FILENO, message, len);
 	if (ret == -1)
 	{
-		/* Error occurred while writing */
 		const char *error_message = strerror(errno);
 		ssize_t error_len = strlen(error_message);
+
 		write(STDERR_FILENO, error_message, error_len);
-		return (1);
+		return 1;
 	}
 
-	return (1);
+	return 1;
 }
