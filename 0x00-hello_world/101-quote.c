@@ -20,8 +20,8 @@ int main(void)
 		ssize_t error_len = strlen(error_message);
 
 		write(STDERR_FILENO, error_message, error_len);
-		return 1;
+		return (1);
 	}
 
-	return 1;
+	return (1);
 }
