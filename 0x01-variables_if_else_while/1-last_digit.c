@@ -1,27 +1,36 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h> /* Added for printf function */
 #include <time.h>
 
 /**
- * main - Entry point of the program
+ * main - Entry point
  *
- * Return: 0 on success
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
 	int n;
+	int last_digit;
 
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
 
-	printf("Last digit of %d is %d ", n, abs(n % 10));
+	last_digit = n % 10;
 
-	if (abs(n % 10) > 5)
-		printf("and is greater than 5\n");
-	else if (abs(n % 10) == 0)
-		printf("and is 0\n");
+	printf("Last digit of %d is ", n);
+
+	if (last_digit > 5)
+	{
+		printf("%d and is greater than 5\n", last_digit);
+	}
+	else if (last_digit == 0)
+	{
+		printf("%d and is 0\n", last_digit);
+	}
 	else
-		printf("and is less than 6 and not 0\n");
+	{
+		printf("-%d and is less than 6 and not 0\n", abs(last_digit));
+	}
 
 	return (0);
 }
