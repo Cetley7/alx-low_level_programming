@@ -6,9 +6,13 @@
 void print_numbers(void)
 {
 	int i;
+	char digit;
 
 	for (i = 0; i < 10; i++)
-		_putchar('0' + i);
+	{
+		digit = i + '0';
+		_putchar(digit);
+	}
 
 	_putchar('\n');
 }
