@@ -1,6 +1,13 @@
-#include "main.h"
+#include <stdio.h>
 
-void fizz_buzz(void)
+/**
+ * main - Entry point of the program
+ *
+ * Description: Prints numbers from 1 to 100 with FizzBuzz logic.
+ *
+ * Return: Always 0 (Success)
+ */
+int main(void)
 {
     int i;
 
@@ -30,4 +37,6 @@ void fizz_buzz(void)
     }
 
     printf("\n");
+
+    return 0;
 }
