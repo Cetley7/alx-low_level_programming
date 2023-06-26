@@ -17,6 +17,7 @@ void rev_string(char *s)
 	end = length - 1;
 
 	/* Swap characters from start and end indices until they meet in the middle */
+
 	while (start < end)
 	{
 		char temp = s[start];
