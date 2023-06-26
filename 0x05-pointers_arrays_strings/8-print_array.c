@@ -3,18 +3,20 @@
 /**
  * print_array - Prints n elements of an array of integers
  * @a: Pointer to the array
- * @n: Number of elements to print
+ * @n: Number of elements to be printed
  */
 void print_array(int *a, int n)
 {
-	int i;
+	int j;
 
-	for (i = 0; i < n; i++)
+	for (j = 0; j < n; j++)
 	{
-		printf("%d", a[i]);
+		printf("%d", a[j]);
 
-		if (i != n - 1)
+		if (j != n - 1)
+		{
 			printf(", ");
+		}
 	}
 
 	printf("\n");
