@@ -9,6 +9,7 @@
  */
 char *_strcat(char *dest, char *src)
 {
+	/* Use tabs for indentation */
 	char *ptr = dest;
 
 	while (*ptr != '\0')
