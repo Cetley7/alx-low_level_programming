@@ -1,57 +1,57 @@
 #include "main.h"
 
 /**
- * infinite_add - Adds two numbers
- * @n1: The first number
- * @n2: The second number
- * @r: The buffer to store the result
- * @size_r: The size of the buffer
+ * infinite_add - Adds two numbers.
+ * @n1: The first number as a string.
+ * @n2: The second number as a string.
+ * @r: The buffer to store the result.
+ * @size_r: The size of the buffer.
  *
- * Return: Pointer to the result (r), or 0 if result cannot be stored
+ * Return: A pointer to the result.
  */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int len1 = 0, len2 = 0;
-	int i, j, k;
-	int sum = 0, carry = 0;
+	int len1 = 0, len2 = 0, carry = 0, sum = 0;
+	int i, j;
 
-	/* Calculate lengths of n1 and n2 */
+	/* Calculate the lengths of the input strings */
 	while (n1[len1] != '\0')
 		len1++;
 	while (n2[len2] != '\0')
 		len2++;
 
-	if (len1 >= size_r || len2 >= size_r)
-		return (0); /* Result cannot be stored in r */
+	if (len1 > size_r || len2 > size_r)
+		return (0);
 
-	i = len1 - 1;
-	j = len2 - 1;
-	k = size_r - 1;
-	r[k] = '\0'; /* Set null terminator */
-
-	while (i >= 0 || j >= 0)
+	/* Add digits from right to left */
+	for (i = len1 - 1, j = len2 - 1; i >= 0 || j >= 0 || carry; i--, j--)
 	{
 		sum = carry;
+
 		if (i >= 0)
 			sum += n1[i] - '0';
 		if (j >= 0)
 			sum += n2[j] - '0';
 
 		carry = sum / 10;
-		r[--k] = sum % 10 + '0';
+		sum %= 10;
 
-		i--;
-		j--;
-
-		if (k < 0 && (i >= 0 || j >= 0 || carry != 0))
-			return (0); /* Result cannot be stored in r */
+		/* Store the result in reverse order */
+		r[size_r - 1] = sum + '0';
+		size_r--;
 	}
 
-	if (carry != 0 && k > 0)
+	if (size_r == 0 && carry)
+		return (0);
+
+	/* Shift the result to the right if necessary */
+	if (size_r > 0 && carry)
 	{
-		r[--k] = carry + '0';
-		return (&r[k]);
+		for (i = size_r - 1; i >= 0; i--)
+			r[i + 1] = r[i];
+
+		r[0] = carry + '0';
 	}
 
-	return (&r[k + 1]);
+	return (&r[size_r]);
 }
