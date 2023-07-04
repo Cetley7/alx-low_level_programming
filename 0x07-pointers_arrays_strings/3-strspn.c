@@ -25,13 +25,10 @@ unsigned int _strspn(char *s, char *accept)
 			}
 			accept++;
 		}
-
 		if (match == 0)
 			break;
-
 		s++;
 		accept = accept - count;
 	}
-
 	return (count);
 }
