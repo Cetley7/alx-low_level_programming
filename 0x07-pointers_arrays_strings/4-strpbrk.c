@@ -17,11 +17,11 @@ char *_strpbrk(char *s, char *accept)
 		while (*byte)
 		{
 			if (*s == *byte)
-				return (s);
+				return s;
 			byte++;
 		}
 		s++;
 	}
-	return (NULL);
+	return NULL;
 }
 
