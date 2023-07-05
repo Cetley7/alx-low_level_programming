@@ -15,7 +15,7 @@ int calculate_sqrt(int n, int sqrt)
 	if (sqrt * sqrt > n) /* Base case: square root does not exist */
 		return (-1);
 
-	return (calculate_sqrt(n, sqrt + 1)); /* Recursively increment the guess for the square root */
+	return (calculate_sqrt(n, sqrt + 1));
 }
 
 /**
