@@ -1,6 +1,16 @@
 #include "main.h"
 
 /**
+ * check_palindrome - Helper function to recursively check if a string is a palindrome.
+ * @s: The string to check.
+ * @start: The starting index.
+ * @end: The ending index.
+ *
+ * Return: 1 if the string is a palindrome, otherwise 0.
+ */
+int check_palindrome(char *s, int start, int end);
+
+/**
  * is_palindrome - Checks if a string is a palindrome.
  * @s: The string to check.
  *
