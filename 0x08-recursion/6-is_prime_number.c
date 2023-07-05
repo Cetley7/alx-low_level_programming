@@ -5,17 +5,17 @@
  * @n: The number to check.
  * @divisor: The current divisor to check.
  *
- * Return: 1 if the number is divisible by any number less than it, otherwise 0.
+ * Return: 1 if the number is divisible by any number less than it.
  */
 int is_divisible(int n, int divisor)
 {
 	if (divisor == 1) /* Base case: divisor reaches 1, number is prime */
 		return (1);
 
-	if (n % divisor == 0) /* Base case: number is divisible by divisor, not prime */
+	if (n % divisor == 0)
 		return (0);
 
-	return (is_divisible(n, divisor - 1)); /* Recursively check the next divisor */
+	return (is_divisible(n, divisor - 1));
 }
 
 /**
