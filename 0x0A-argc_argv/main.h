@@ -4,5 +4,5 @@
 #include <stdio.h>
 
 void _puts(char *s);
-
+int _putchar(char c);
 #endif /* MAIN_H */
