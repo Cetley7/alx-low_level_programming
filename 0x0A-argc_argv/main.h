@@ -5,4 +5,5 @@
 
 void _puts(char *s);
 int _putchar(char c);
+int add_numbers(int argc, char *argv[]);
 #endif /* MAIN_H */
