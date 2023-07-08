@@ -6,4 +6,5 @@
 void _puts(char *s);
 int _putchar(char c);
 int add_numbers(int argc, char *argv[]);
+int calculate_minimum_coins(int cents);
 #endif /* MAIN_H */
