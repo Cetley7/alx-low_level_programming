@@ -67,17 +67,21 @@ void free_memory(char **words, int num_words)
  */
 char **strtow(char *str)
 {
+    int num_words;
+    char **words;
+    char *token;
+    int i;
+
     if (str == NULL || *str == '\0')
         return NULL;
 
-    int num_words = count_words(str);
-    char **words = allocate_memory(num_words);
+    num_words = count_words(str);
+    words = allocate_memory(num_words);
     if (words == NULL)
         return NULL;
 
-    char *token;
-    int i = 0;
     token = strtok(str, " ");
+    i = 0;
     while (token != NULL)
     {
         words[i] = strdup(token);
