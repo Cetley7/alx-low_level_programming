@@ -62,12 +62,13 @@ char **strtow(char *str)
 		{
 			idx1++;
 		}
-	}
+        }
 
-	words[idx2] = NULL; 
+        words[idx2] = NULL;
 
-	return (words);
+        return (words);
 }
+
 
 /**
  * count_words - counts  number of words in one  string
