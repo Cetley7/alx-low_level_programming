@@ -1,95 +1,129 @@
+#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include "main.h"
 
-#define MAX_WORD_LENGTH 100
+int count_words(char *str);
+int word_length(char *str);
+void free_words(char **words);
 
-char **strtow(char *str) {
-    if (str == NULL || *str == '\0') {
-        return NULL;
-    }
+/**
+ * strtow - splits a string into words
+ * @str: the string to split
+ *
+ * Return: Pointer of strings (words),
+ *         or if allocation fails
+ */
+char **strtow(char *str)
+{
+	char **words;
+	int num_words, idx1, idx2, idx3, length, word_len;
 
-    // Count the number of words
-    int word_count = 0;
-    int len = strlen(str);
-    int i = 0;
-    while (i < len) {
-        // Skip leading spaces
-        while (i < len && str[i] == ' ') {
-            i++;
-        }
+	/* Check for NULL or empty string */
+	if (str == NULL || *str == '\0')
+		return (NULL);
 
-        // Count the word
-        if (i < len && str[i] != ' ') {
-            word_count++;
-            while (i < len && str[i] != ' ') {
-                i++;
-            }
-        }
-    }
+	/* Count the number of words */
+	num_words = count_words(str);
+	if (num_words == 0)
+		return (NULL);
 
-    // Allocate memory for the array of words
-    char **words = (char **)malloc((word_count + 1) * sizeof(char *));
-    if (words == NULL) {
-        return NULL;
-    }
+	/* Allocate memory */
+	words = malloc((num_words + 1) * sizeof(char *));
+	if (words == NULL)
+		return (NULL);
 
-    // Split the string into words
-    int word_index = 0;
-    i = 0;
-    while (i < len) {
-        // Skip leading spaces
-        while (i < len && str[i] == ' ') {
-            i++;
-        }
+	/* Extract words from the string and store em in the array */
+	idx1 = 0;
+	idx2 = 0;
+	while (str[idx1] != '\0')
+	{
+		if (str[idx1] != ' ')
+		{
+			word_len = word_length(&str[idx1]);
+			words[idx2] = malloc((word_len + 1) * sizeof(char));
+			if (words[idx2] == NULL)
+			{
+				free_words(words);
+				return (NULL);
+			}
 
-        // Process the word
-        if (i < len && str[i] != ' ') {
-            int word_length = 0;
-            while (i < len && str[i] != ' ') {
-                word_length++;
-                i++;
-            }
+			length = 0;
+			for (idx3 = idx1; idx3 < (idx1 + word_len); idx3++)
+			{
+				words[idx2][length] = str[idx3];
+				length++;
+			}
+			words[idx2][length] = '\0';
 
-            // Allocate memory for the word
-            words[word_index] = (char *)malloc((word_length + 1) * sizeof(char));
-            if (words[word_index] == NULL) {
-                // Free memory for already allocated words
-                for (int j = 0; j < word_index; j++) {
-                    free(words[j]);
-                }
-                free(words);
-                return NULL;
-            }
+			idx2++;
+			idx1 += word_len;
+		}
+		else
+		{
+			idx1++;
+		}
+	}
 
-            // Copy the word into the array
-            strncpy(words[word_index], str + i - word_length, word_length);
-            words[word_index][word_length] = '\0';
-            word_index++;
-        }
-    }
+	words[idx2] = NULL; 
 
-    words[word_index] = NULL;  // Mark the end of the array
-
-    return words;
+	return (words);
 }
 
-int main() {
-    char str[] = "Hello world! This is a test.";
-    char **words = strtow(str);
+/**
+ * count_words - counts  number of words in one  string
+ * @str: the string
+ *
+ * Return: Number of words
+ */
+int count_words(char *str)
+{
+	int count = 0, idx = 0;
 
-    if (words != NULL) {
-        // Print the words
-        for (int i = 0; words[i] != NULL; i++) {
-            printf("%s\n", words[i]);
-        }
+	while (str[idx] != '\0')
+	{
+		if (str[idx] != ' ' && (str[idx + 1] == ' ' || str[idx + 1] == '\0'))
+			count++;
+		idx++;
+	}
 
-        // Free the memory allocated for words
-        for (int i = 0; words[i] != NULL; i++) {
-            free(words[i]);
-        }
-        free(words);
-    }
+	return (count);
+}
 
-    return 0;
+/**
+ * word_length - computes length
+ * @str: the string
+ *
+ * Return: Length of the word
+ */
+int word_length(char *str)
+{
+	int length = 0, idx = 0;
+
+	while (str[idx] != '\0' && str[idx] != ' ')
+	{
+		length++;
+		idx++;
+	}
+
+	return (length);
+}
+
+/**
+ * free_words - frees memory allocated
+ * @words:  array of words
+ *
+ * Return: Nothing
+ */
+void free_words(char **words)
+{
+	int idx = 0;
+
+	while (words[idx] != NULL)
+	{
+		free(words[idx]);
+		idx++;
+	}
+
+	free(words);
 }
 
