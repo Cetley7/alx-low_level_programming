@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 /**
  * count_words - Count the number of words in a string.
@@ -10,24 +9,24 @@
  */
 int count_words(char *str)
 {
-	int count = 0;
-	int is_word = 0;
+    int count = 0;
+    int is_word = 0;
 
-	while (*str)
-	{
-		if (*str != ' ' && !is_word)
-		{
-			is_word = 1;
-			count++;
-		}
-		else if (*str == ' ')
-		{
-			is_word = 0;
-		}
-		str++;
-	}
+    while (*str)
+    {
+        if (*str != ' ' && !is_word)
+        {
+            is_word = 1;
+            count++;
+        }
+        else if (*str == ' ')
+        {
+            is_word = 0;
+        }
+        str++;
+    }
 
-	return (count);
+    return count;
 }
 
 /**
@@ -38,11 +37,11 @@ int count_words(char *str)
  */
 char **allocate_memory(int num_words)
 {
-	char **words = (char **)malloc(sizeof(char *) * (num_words + 1));
-	if (words == NULL)
-		return (NULL);
+    char **words = (char **)malloc(sizeof(char *) * (num_words + 1));
+    if (words == NULL)
+        return NULL;
 
-	return (words);
+    return words;
 }
 
 /**
@@ -52,11 +51,12 @@ char **allocate_memory(int num_words)
  */
 void free_memory(char **words, int num_words)
 {
-	for (int i = 0; i < num_words; i++)
-	{
-		free(words[i]);
-	}
-	free(words);
+    int i;
+    for (i = 0; i < num_words; i++)
+    {
+        free(words[i]);
+    }
+    free(words);
 }
 
 /**
@@ -67,29 +67,30 @@ void free_memory(char **words, int num_words)
  */
 char **strtow(char *str)
 {
-	if (str == NULL || *str == '\0')
-		return (NULL);
+    if (str == NULL || *str == '\0')
+        return NULL;
 
-	int num_words = count_words(str);
-	char **words = allocate_memory(num_words);
-	if (words == NULL)
-		return (NULL);
+    int num_words = count_words(str);
+    char **words = allocate_memory(num_words);
+    if (words == NULL)
+        return NULL;
 
-	char *token = strtok(str, " ");
-	int i = 0;
-	while (token != NULL)
-	{
-		words[i] = strdup(token);
-		if (words[i] == NULL)
-		{
-			free_memory(words, i);
-			return (NULL);
-		}
-		token = strtok(NULL, " ");
-		i++;
-	}
+    char *token;
+    int i = 0;
+    token = strtok(str, " ");
+    while (token != NULL)
+    {
+        words[i] = strdup(token);
+        if (words[i] == NULL)
+        {
+            free_memory(words, i);
+            return NULL;
+        }
+        token = strtok(NULL, " ");
+        i++;
+    }
 
-	words[i] = NULL;
-	return (words);
+    words[i] = NULL;
+    return words;
 }
 
