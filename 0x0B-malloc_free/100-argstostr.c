@@ -22,7 +22,7 @@ char *argstostr(int ac, char **av)
 	for (i = 0; i < ac; i++)
 		total_length += strlen(av[i]) + 1; /* +1 for '\n' */
 
-	result = (char *)malloc(sizeof(char) * total_length);
+	result = (char *)malloc(sizeof(char) * (total_length + 1)); /* +1 for null terminator */
 	if (result == NULL)
 		return (NULL);
 
@@ -33,6 +33,8 @@ char *argstostr(int ac, char **av)
 		result[current_position] = '\n';
 		current_position++;
 	}
+
+	result[current_position] = '\0'; /* Add null terminator */
 
 	return (result);
 }
