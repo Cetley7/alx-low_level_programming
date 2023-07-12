@@ -1,53 +1,35 @@
-#include "main.h"
 #include <stdlib.h>
-#include <stdio.h>
+#include <string.h>
 
 /**
- * _argstostr - Concatenates all the arguments of a program.
+ * argstostr - Concatenates all arguments of a program.
  * @ac: The argument count.
- * @av: The argument vector.
+ * @av: An array of arguments.
  *
- * Return: A pointer to the concatenated string, or NULL if it fails.
+ * Return: A pointer to the concatenated string, or NULL on failure.
  */
-char *_argstostr(int ac, char **av)
+char *argstostr(int ac, char **av)
 {
 	if (ac == 0 || av == NULL)
 		return (NULL);
 
 	int total_length = 0;
-	int i, j;
-	char *result;
+	for (int i = 0; i < ac; i++)
+		total_length += strlen(av[i]) + 1; /* +1 for '\n' */
 
-	for (i = 0; i < ac; i++)
-	{
-		j = 0;
-		while (av[i][j] != '\0')
-		{
-			total_length++;
-			j++;
-		}
-		total_length++; /* +1 for the newline character */
-	}
-
-	result = (char *)malloc((total_length + 1) * sizeof(char));
+	char *result = malloc(sizeof(char) * total_length);
 	if (result == NULL)
 		return (NULL);
 
-	int index = 0;
-	for (i = 0; i < ac; i++)
+	int current_position = 0;
+	for (int i = 0; i < ac; i++)
 	{
-		j = 0;
-		while (av[i][j] != '\0')
-		{
-			result[index] = av[i][j];
-			index++;
-			j++;
-		}
-		result[index] = '\n'; /* Add newline character */
-		index++;
+		strcpy(result + current_position, av[i]);
+		current_position += strlen(av[i]);
+		result[current_position] = '\n';
+		current_position++;
 	}
-
-	result[index] = '\0'; /* Null-terminate the result string */
 
 	return (result);
 }
+
