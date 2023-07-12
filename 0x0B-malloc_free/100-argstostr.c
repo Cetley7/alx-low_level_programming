@@ -3,48 +3,51 @@
 #include <stdio.h>
 
 /**
- * argstostr - concatenates all the arguments of the program
- * @ac: the argument count
- * @av: the argument vector
+ * _argstostr - Concatenates all the arguments of a program.
+ * @ac: The argument count.
+ * @av: The argument vector.
  *
- * Return: pointer to the concatenated string, or NULL on failure
+ * Return: A pointer to the concatenated string, or NULL if it fails.
  */
-char *argstostr(int ac, char **av)
+char *_argstostr(int ac, char **av)
 {
-	char *concatenated;
-	int total_length = 0, arg_length, i, j;
-	int index = 0;
-
 	if (ac == 0 || av == NULL)
 		return (NULL);
 
+	int total_length = 0;
+	int i, j;
+	char *result;
+
 	for (i = 0; i < ac; i++)
 	{
-		arg_length = 0;
-		while (av[i][arg_length] != '\0')
-			arg_length++;
-		total_length += arg_length + 1; /* Add 1 for newline character */
+		j = 0;
+		while (av[i][j] != '\0')
+		{
+			total_length++;
+			j++;
+		}
+		total_length++; /* +1 for the newline character */
 	}
 
-	concatenated = malloc(sizeof(char) * (total_length + 1));
-	if (concatenated == NULL)
+	result = (char *)malloc((total_length + 1) * sizeof(char));
+	if (result == NULL)
 		return (NULL);
 
+	int index = 0;
 	for (i = 0; i < ac; i++)
 	{
-		arg_length = 0;
-		while (av[i][arg_length] != '\0')
+		j = 0;
+		while (av[i][j] != '\0')
 		{
-			concatenated[index] = av[i][arg_length];
+			result[index] = av[i][j];
 			index++;
-			arg_length++;
+			j++;
 		}
-		concatenated[index] = '\n';
+		result[index] = '\n'; /* Add newline character */
 		index++;
 	}
 
-	concatenated[index] = '\0'; /* Add the null terminator */
+	result[index] = '\0'; /* Null-terminate the result string */
 
-	return (concatenated);
+	return (result);
 }
-
