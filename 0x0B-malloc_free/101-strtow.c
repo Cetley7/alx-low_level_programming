@@ -7,11 +7,11 @@ int word_length(char *str);
 void free_words(char **words);
 
 /**
- * strtow - splits a string into words
+ * strtow - splits string into words
  * @str: the string to split
  *
- * Return: Pointer of strings (words),
- *         or if allocation fails
+ * Return: Pointer to array of strings,
+ *         or memory allocation fails
  */
 char **strtow(char *str)
 {
@@ -27,12 +27,12 @@ char **strtow(char *str)
 	if (num_words == 0)
 		return (NULL);
 
-	/* Allocate memory */
+	/* Allocate memory for the array of words */
 	words = malloc((num_words + 1) * sizeof(char *));
 	if (words == NULL)
 		return (NULL);
 
-	/* Extract words from the string and store em in the array */
+	/* Extract the words from string and then store them */
 	idx1 = 0;
 	idx2 = 0;
 	while (str[idx1] != '\0')
@@ -62,16 +62,15 @@ char **strtow(char *str)
 		{
 			idx1++;
 		}
-        }
+	}
 
-        words[idx2] = NULL;
+	words[idx2] = NULL;
 
-        return (words);
+	return (words);
 }
 
-
 /**
- * count_words - counts  number of words in one  string
+ * count_words - counts the number of words in a string
  * @str: the string
  *
  * Return: Number of words
@@ -91,7 +90,7 @@ int count_words(char *str)
 }
 
 /**
- * word_length - computes length
+ * word_length - computes the length of a word
  * @str: the string
  *
  * Return: Length of the word
@@ -111,7 +110,7 @@ int word_length(char *str)
 
 /**
  * free_words - frees memory allocated
- * @words:  array of words
+ * @words: the array of words
  *
  * Return: Nothing
  */
