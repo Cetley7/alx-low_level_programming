@@ -4,10 +4,12 @@
 
 /**
  * main - Simple calculator program.
- * @argc: The number of arguments.
- * @argv: An array of pointers to the arguments.
- *
- * Return: Always 0.
+ * if not 4 arguments, return Error & exit 98
+ * if op is null, return Error & exit 99
+ * if div or mod 0, return Error & exit 100
+ * @argc: arguments
+ * @argv: double pointer to arguments
+ * Return: 0
  */
 int main(int argc, char *argv[])
 {

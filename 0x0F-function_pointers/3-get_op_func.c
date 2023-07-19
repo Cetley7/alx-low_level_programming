@@ -3,11 +3,9 @@
 #include <stdio.h>
 
 /**
- * get_op_func - Selects the correct function to perform the operation.
- * @s: The operator passed as an argument to the program.
- *
- * Return: Pointer to the function that corresponds to the operator given as a parameter.
- *         If s does not match any of the 5 expected operators (+, -, *, /, %), return NULL.
+ * get_op_func - matches operator from main
+ * @s: op str to the program
+ * Return: 0
  */
 int (*get_op_func(char *s))(int, int)
 {
