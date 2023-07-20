@@ -3,47 +3,54 @@
 #include "variadic_functions.h"
 
 /**
- * print_all - Prints anything based on the given format.
- * @format: The format string containing the types of arguments.
+ * print_all - Prints anything based on the provided format.
+ * @format: The list of types of arguments passed to the function.
+ *          c: char
+ *          i: integer
+ *          f: float
+ *          s: char * (if the string is NULL, print (nil) instead)
+ *          any other char should be ignored.
  */
 void print_all(const char * const format, ...)
 {
-	va_list args;
-	const char *ptr = format;
-	char *separator = "";
-	char *str;
+	int i = 0;
+	char *str, *separator = "";
 
-	va_start(args, format);
+	va_list list;
 
-	while (format && *ptr)
+	va_start(list, format);
+
+	if (format)
 	{
-		switch (*ptr)
+		while (format[i])
 		{
-			case 'c':
-				printf("%s%c", separator, va_arg(args, int));
-				break;
-			case 'i':
-				printf("%s%d", separator, va_arg(args, int));
-				break;
-			case 'f':
-				printf("%s%f", separator, va_arg(args, double));
-				break;
-			case 's':
-				str = va_arg(args, char *);
-				if (str == NULL)
-					str = "(nil)";
-				printf("%s%s", separator, str);
-				break;
-			default:
-				/* Ignore other characters in the format string */
-				break;
+			switch (format[i])
+			{
+				case 'c':
+					printf("%s%c", separator, va_arg(list, int));
+					break;
+				case 'i':
+					printf("%s%d", separator, va_arg(list, int));
+					break;
+				case 'f':
+					printf("%s%f", separator, va_arg(list, double));
+					break;
+				case 's':
+					str = va_arg(list, char *);
+					if (!str)
+						str = "(nil)";
+					printf("%s%s", separator, str);
+					break;
+				default:
+					i++;
+					continue;
+			}
+			separator = ", ";
+			i++;
 		}
-
-		separator = ", ";
-		ptr++;
 	}
 
 	printf("\n");
-	va_end(args);
+	va_end(list);
 }
 
