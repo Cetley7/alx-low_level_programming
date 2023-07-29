@@ -1,17 +1,17 @@
 #ifndef LISTS_H
 #define LISTS_H
 
-/* Other necessary includes and structures go here */
+#include <stddef.h>
 
-/* Structure for the linked list */
+/* Structure for singly linked list */
 typedef struct list_s
 {
     char *str;
-    int len;
+    unsigned int len;
     struct list_s *next;
 } list_t;
 
-/* Function prototype for print_list */
+/* Function prototype to print all elements of the list */
 size_t print_list(const list_t *h);
 
 #endif /* LISTS_H */
