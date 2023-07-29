@@ -8,11 +8,11 @@
  */
 int _str_len(const char *s)
 {
-    int length;
+	int length;
 
-    for (length = 0; s[length]; length++)
-        ;
-    return (length);
+	for (length = 0; s[length]; length++)
+		;
+	return (length);
 }
 
 /**
@@ -23,33 +23,33 @@ int _str_len(const char *s)
  */
 list_t *add_node(list_t **head, const char *str)
 {
-    int index, string_length;
-    char *content;
-    list_t *new_node;
+	int index, string_length;
+	char *str_dup;
+	list_t *new_element;
 
-    if (str == NULL || head == NULL)
-        return (NULL);
+	if (str == NULL || head == NULL)
+		return (NULL);
 
-    string_length = _str_len(str);
-    content = malloc((string_length + 1) * sizeof(char));
-    if (content == NULL)
-        return (NULL);
+	string_length = _str_len(str);
+	str_dup = malloc((string_length + 1) * sizeof(char));
+	if (str_dup == NULL)
+		return (NULL);
 
-    for (index = 0; str[index]; index++)
-        content[index] = str[index];
+	for (index = 0; str[index]; index++)
+		str_dup[index] = str[index];
 
-    new_node = malloc(sizeof(list_t));
-    if (new_node == NULL)
-    {
-        free(content);
-        return (NULL);
-    }
+	new_element = malloc(sizeof(list_t));
+	if (new_element == NULL)
+	{
+		free(str_dup);
+		return (NULL);
+	}
 
-    new_node->str = content;
-    new_node->len = string_length;
-    new_node->next = *head;
-    *head = new_node;
+	new_element->str = str_dup;
+	new_element->len = string_length;
+	new_element->next = *head;
+	*head = new_element;
 
-    return (new_node);
+	return (new_element);
 }
 
