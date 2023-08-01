@@ -34,5 +34,8 @@ void free_listint(listint_t *head);
 /* Function to free a listint_t list and set head to NULL */
 void free_listint2(listint_t **head);
 
+/* Function to delete the head node and return its data */
+int pop_listint(listint_t **head);
+
 #endif /* LISTS_H */
 
