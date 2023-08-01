@@ -43,5 +43,8 @@ listint_t *get_nodeint_at_index(listint_t *head, unsigned int index);
 /* Function to calculate the sum of all data (n) in the list */
 int sum_listint(listint_t *head);
 
+/* Function to insert a new node at a given position */
+listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n);
+
 #endif /* LISTS_H */
 
