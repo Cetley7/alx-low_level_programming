@@ -4,36 +4,37 @@
 #include <stdio.h>
 
 /**
- * find_listint_loop - Find the loop in a linked list using Floyd's algorithm.
+ * find_listint_loop - Finds the start node of the loop in a linked list.
  * @head: Pointer to the head of the linked list.
- *
- * Return: The address of the node where the loop starts, or NULL if there is no loop.
+ * Return: Address of the node where the loop starts, or NULL if there is no loop.
  */
 listint_t *find_listint_loop(listint_t *head)
 {
-    if (head == NULL || head->next == NULL)
-        return (NULL);
+	listint_t *slow = head;
+	listint_t *fast = head;
 
-    listint_t *tortoise = head;
-    listint_t *hare = head;
+	/* Move slow by one step and fast by two steps */
+	while (slow != NULL && fast != NULL && fast->next != NULL)
+	{
+		slow = slow->next;
+		fast = fast->next->next;
 
-    while (hare != NULL && hare->next != NULL)
-    {
-        tortoise = tortoise->next;
-        hare = hare->next->next;
+		/* If slow and fast meet, there is a loop */
+		if (slow == fast)
+		{
+			/* Reset slow to the head and move both pointers one step at a time */
+			slow = head;
+			while (slow != fast)
+			{
+				slow = slow->next;
+				fast = fast->next;
+			}
 
-        if (tortoise == hare)
-        {
-            tortoise = head;
-            while (tortoise != hare)
-            {
-                tortoise = tortoise->next;
-                hare = hare->next;
-            }
-            return (hare);
-        }
-    }
+			/* Now slow and fast point to the node where the loop starts */
+			return (slow);
+		}
+	}
 
-    return (NULL);
+	return (NULL); /* No loop found */
 }
 
