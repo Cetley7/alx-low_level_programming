@@ -6,7 +6,7 @@
 /**
  * find_listint_loop - Finds the start node of the loop in a linked list.
  * @head: Pointer to the head of the linked list.
- * Return: Address of the node where the loop starts, or NULL if there is no loop.
+ * Return: Address of the node where the loop starts, or NULL.
  */
 listint_t *find_listint_loop(listint_t *head)
 {
@@ -22,7 +22,7 @@ listint_t *find_listint_loop(listint_t *head)
 		/* If slow and fast meet, there is a loop */
 		if (slow == fast)
 		{
-			/* Reset slow to the head and move both pointers one step at a time */
+			/* Reset slow to the head */
 			slow = head;
 			while (slow != fast)
 			{
