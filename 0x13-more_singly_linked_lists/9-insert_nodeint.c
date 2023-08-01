@@ -3,7 +3,7 @@
 #include "lists.h"
 
 /**
- * create_new_node - Creates a new node and initializes it with the given value.
+ * create_new_node - Creates a new node and initializes.
  * @n: Value to be stored in the new node.
  *
  * Return: Address of the new node, or NULL if it failed.
@@ -11,6 +11,7 @@
 static listint_t *create_new_node(int n)
 {
 	listint_t *new_node = malloc(sizeof(listint_t));
+
 	if (new_node != NULL)
 	{
 		new_node->n = n;
@@ -22,7 +23,7 @@ static listint_t *create_new_node(int n)
 /**
  * insert_nodeint_at_index - Inserts a new node at a given position.
  * @head: Pointer to the pointer of the head node.
- * @idx: Index of the list where the new node should be added (starting from 0).
+ * @idx: Index of the list where the new node should be added.
  * @n: Value to be stored in the new node.
  *
  * Return: Address of the new node, or NULL if it failed.
