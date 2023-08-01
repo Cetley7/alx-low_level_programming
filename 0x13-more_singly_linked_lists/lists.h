@@ -25,5 +25,8 @@ size_t listint_len(const listint_t *h);
 /* Function to add a new node at the beginning of the list */
 listint_t *add_nodeint(listint_t **head, const int n);
 
+/* Function to add a new node at the end of the list */
+listint_t *add_nodeint_end(listint_t **head, const int n);
+
 #endif /* LISTS_H */
 
