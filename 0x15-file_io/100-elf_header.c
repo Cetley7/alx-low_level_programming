@@ -64,8 +64,10 @@ int open_elf_file(const char *filename)
 
 void display_elf_header(int fd)
 {
-    Elf64_Ehdr header;
+	 Elf64_Ehdr header;
     ssize_t bytes_read;
+
+    int i;
 
     bytes_read = read(fd, &header, sizeof(header));
     if (bytes_read != sizeof(header))
@@ -76,7 +78,7 @@ void display_elf_header(int fd)
 
     printf("ELF Header:\n");
     printf("  Magic:   ");
-    for (int i = 0; i < EI_NIDENT; i++)
+    for (i = 0; i < EI_NIDENT; i++)
         printf("%02x%c", header.e_ident[i], (i == EI_NIDENT - 1) ? '\n' : ' ');
 
     printf("  Class:                             ");
