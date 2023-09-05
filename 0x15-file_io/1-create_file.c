@@ -1,6 +1,8 @@
 #include "main.h"
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * create_file - Creates a file and writes text content to it.
