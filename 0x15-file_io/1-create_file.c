@@ -1,40 +1,43 @@
-#include "main.h"
 #include <fcntl.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "main.h"
 
 /**
- * create_file - Creates a file and writes text content to it.
- * @filename: The name of the file to create.
- * @text_content: The text content to write to the file.
+ * create_file - Creates or truncates a file and writes text to it
+ * @filename: Name of the file to create or truncate
+ * @text_content: NULL-terminated string to write to the file
  *
- * Return: 1 on success, -1 on failure.
+ * Return: 1 on success, -1 on failure
  */
 int create_file(const char *filename, char *text_content)
 {
-	int file_descriptor, write_result;
-	mode_t file_permissions = S_IRUSR | S_IWUSR; // rw-------
+	int fd, write_status, i;
 
 	if (filename == NULL)
 		return (-1);
 
-	file_descriptor = open(filename, O_CREAT | O_WRONLY | O_TRUNC, file_permissions);
-	if (file_descriptor == -1)
+	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	if (fd == -1)
 		return (-1);
 
 	if (text_content != NULL)
 	{
-		write_result = write(file_descriptor, text_content, strlen(text_content));
-		if (write_result == -1)
+		for (i = 0; text_content[i] != '\0'; i++)
 		{
-			close(file_descriptor);
-			return (-1);
+			/* Write each character to the file */
+			write_status = write(fd, &text_content[i], 1);
+			if (write_status == -1)
+			{
+				close(fd);
+				return (-1);
+			}
 		}
 	}
 
-	close(file_descriptor);
+	close(fd);
 	return (1);
 }
 
